@@ -1,0 +1,16 @@
+{% extends 'inicio.html' %}
+
+{% block titulo%} Music {% endblock %}
+
+{% block encabezado %}
+	<h2>Busca tu usuario</h2>
+{% endblock %}
+
+{% block contenido %}
+	<form id='formulario' method='post' action=''>{% csrf_token %}
+	{{formulario.as_p}}
+	<p><input type='submit' value='Confirmar'/></p>
+	</form>
+	{{error}}
+{% endblock %}
+	

@@ -9,6 +9,8 @@ urlpatterns = patterns('',
     url(r'^$', 'principal.views.inicio'),
     # url(r'^$', 'Animame.views.home', name='home'),
     # url(r'^Animame/', include('Animame.foo.urls')),
+    
+    url(r'^searchusuario/', 'principal.views.buscar_usuario'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
