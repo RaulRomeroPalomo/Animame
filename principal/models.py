@@ -32,9 +32,9 @@ class Anime(models.Model):
     
     
 class Usuario(models.Model):
-    usuario = models.CharField(max_length=100, null=False, blank=False)
+    usuario = models.CharField(max_length=100, null=False, blank=False, unique=True)
     topgeneros = models.ManyToManyField(Genero)
     topestudios = models.ManyToManyField(Estudio)
-    image = models.URLField()
+    image = models.URLField(blank=True)
     def __unicode__(self):
         return self.usuario

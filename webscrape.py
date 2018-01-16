@@ -99,19 +99,27 @@ def getUsuario(nombre):
     r=requests.get(url)
     data = r.text
     soup = BeautifulSoup(data, "lxml")
-    result = "Ok"
-    if "404 Not Found" in soup:
+    result = "?"
+    if "404" in soup.find("h1",{"class","h1"}).get_text():
         result = "No existe el usuario"
     else:
         allgenres = []
         allstudios = []
-        url = soup.find("div",{"class":"user-image mb8"}).img['src']
-        favanime = soup.find("ul",{"class":"favorites-list anime"}).findAll("li",{"class":"list di-t mb8"})
-        user = Usuario.objects.get_or_create(usuario=nombre,image=url)
-        user = user[0]
+        url = soup.find("div",{"class":"user-image mb8"})
+        if url.img:
+            url=url.img['src']
+        else:
+            url = ""
+        query = Usuario.objects.filter(usuario=nombre)
+        if query:
+            query.delete()
+        user = Usuario.objects.create(usuario=nombre,image=url)
+        
         user.topestudios.clear()
         user.topgeneros.clear()
+        favanime = soup.find("ul",{"class":"favorites-list anime"})
         if favanime:
+            favanime = favanime.findAll("li",{"class":"list di-t mb8"})
             for fav in favanime:
                 prefs = getDataAnime(fav.findAll("a")[1]['href'])
                 allstudios.append(prefs[0])
@@ -124,10 +132,12 @@ def getUsuario(nombre):
             for genero in topgenres:
                 g = Genero.objects.get_or_create(nombre=genero)
                 user.topgeneros.add(g[0])
-
+            
+            result = user
         else:
-            result = "El usuario no tiene favoritos"
-
+            result = nombre+" no tiene animes favoritos, por lo que no podemos hacer ninguna recomendación."
+    
+    print result
     return result
 
 
@@ -169,4 +179,4 @@ def getDataAnime(url):
     
        
 if __name__=="__main__":
-    getUsuario("Yunekow")
+    getUsuario("Cerilla")
