@@ -13,7 +13,11 @@
 			<p>{{dato.sinopsis}}</p>
 			<p>Lanzamiento: {{dato.lanzamiento}}</p>
 			<p>Tipo: {{dato.tipo}}</p>
-			<p>Estudio: <a href="/listastudios/{{dato.estudio}}">{{dato.estudio}}</a></p>
+			<p>Estudios: 
+				{% for e in dato.estudios.all %}
+					<a href="/listastudios/{{e}}">{{e}}</a> |
+				{% endfor %}
+			</p>
 			<p>Popularidad: {{dato.popularidad}}</p>
 			<p>Generos:
 				<ul>

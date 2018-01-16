@@ -59,6 +59,6 @@ def animes_estudio(request, estudio):
     re = Estudio.objects.get(nombre=estudio)
     res = []
     for a in animes:
-        if re == a.estudio:
+        if re in a.estudios.all():
             res.append(a)
     return render_to_response('lista.html',{'animes':res,'titulo':'Animes del estudio '+estudio})
