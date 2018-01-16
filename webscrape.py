@@ -1,9 +1,11 @@
 #encoding: utf-8
 import sqlite3
+from types import NoneType
 
 from bs4 import BeautifulSoup
 import requests
-from types import NoneType
+
+from principal.models import Anime, Genero, Tipo, Estudio
 
 
 def principal():
@@ -47,21 +49,44 @@ def getAnime(url):
             text =info.get_text()
             if "Aired:" in text:
                 info.span.clear()
-                lanzamiento = info.get_text().strip()
-            
-        genres = "Sin generos"
-        
-                          
+                lanzamiento = info.get_text().strip() 
+
         print lanzamiento
-        genres = soup.find("div",{"id":"content"}).find("div",{"class":"js-scrollfix-bottom"}).find("script",{"type":"text/javascript"})
+        
+        
+        side = soup.find("div",{"id":"content"}).find("div",{"class":"js-scrollfix-bottom"})
+        typeStudio = side.findAll("a")
+        tipo = "No type"
+        studio = "No studio"
+        for ts in typeStudio:
+            if "?type" in ts["href"]:
+                tipo = ts.get_text()
+            otipo =Tipo.objects.get_or_create(nombre=tipo)
+            if "/producer" in ts["href"]:
+                studio = ts.get_text()
+            ostudio = Estudio.objects.get_or_create(nombre=studio)
+                
+        anime = Anime.objects.create(titulo=name,original=original,sinopsis=sinopsis,lanzamiento=lanzamiento,
+                             popularidad=int(popularity),tipo=otipo[0],estudio=ostudio[0])
+        
+        genres=side.find("script",{"type":"text/javascript"})
         if genres:
             listgenres= str(genres).split("genres")[1].split("])")[0].replace('\"',"")[3:].strip().split(",")
             for g in listgenres:
                 print g
-    
+                genero=Genero.objects.get_or_create(nombre=g)
+                anime.generos.add(genero[0])
+        
+        print tipo
+        print studio
+
+        
+        
     except AttributeError as e:
         print e
         
-            
+         
+    
+       
 if __name__=="__main__":
     principal()
