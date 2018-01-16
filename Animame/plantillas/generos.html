@@ -8,21 +8,8 @@
 {% block contenido %}
 	<hr>
 		{% for g in generos %}
-			<h2>{{g}}</h2>
-			{% for dato in anime %}
-				{% if g in dato.generos %}
-					<h3>{{dato.titulo}}</h3>
-					<caption>Original: {{dato.original}}</caption>
-					<p>{{dato.sinopsis}}</p>
-					Lanzamiento: {{dato.lanzamiento}}
-					Tipo: {{dato.tipo}}
-					Estudio: {{dato.estudio}}
-					<hr>
-				{% endif %}
-			{% empty %}
-				<li>No hay Generos.</li>
-				<hr>
-			{% endfor %}
+			<h2><a href="/lista/{{g}}">{{g}}</a></h2>
+			<hr>
 		{% empty %}
 			<li>No hay Generos.</li>
 			<hr>
