@@ -40,6 +40,6 @@ class Anime(models.Model):
 class Usuario(models.Model):
     usuario = models.CharField(max_length=100, null=False, blank=False)
     tags = models.ManyToManyField(Tag)
-    estudio = models.CharField(max_length=100, null=False, blank=False)
+    estudio = models.ForeignKey(max_length=100, null=False, blank=False)
     def __unicode__(self):
         return self.usuario
