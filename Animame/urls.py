@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'Animame.views.home', name='home'),
     # url(r'^Animame/', include('Animame.foo.urls')),
     
+     url(r'^populate/', 'principal.views.populate'),
     url(r'^searchusuario/', 'principal.views.buscar_usuario'),
     url(r'^popularity/', 'principal.views.animes_populares'),
     url(r'^genres/', 'principal.views.animes_generos'),

@@ -7,8 +7,15 @@ from django.template import RequestContext
 from principal.models import *
 from principal.forms import *
 
+import webscrape
+
 def inicio(request):
     return render_to_response('inicio.html')
+
+
+def populate(request):
+    webscrape.principal()
+    return render_to_response('inicio.html',{'mensaje':'Ya tiene disponibles los próximos lanzamientos en Anime'})
 
 
 def buscar_usuario(request):
@@ -26,6 +33,7 @@ def animes_populares(request):
     animes = Anime.objects.order_by('popularidad')
     
     return render_to_response('lista.html',{'animes':animes,'titulo':'Animes por popularidad'})
+
 
 def animes_generos(request):
     animes = Anime.objects.all()
