@@ -28,7 +28,7 @@ class Anime(models.Model):
     estudio = models.CharField(max_length=100, null=False, blank=False)
     generos = models.ManyToManyField(Genero)
     popularidad = models.IntegerField(null=False)
-    clasificacionedad = models.IntegerField()
+#     clasificacionedad = models.IntegerField()
     def __unicode__(self):
         return self.titulo
     
