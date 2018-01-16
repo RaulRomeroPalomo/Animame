@@ -13,7 +13,8 @@ urlpatterns = patterns('',
      url(r'^populate/', 'principal.views.populate'),
     url(r'^searchusuario/', 'principal.views.buscar_usuario'),
     url(r'^popularity/', 'principal.views.animes_populares'),
-    url(r'^genres/', 'principal.views.animes_generos'),
+    url(r'^genres/', 'principal.views.generos'),
+     url(r'^lista/(?P<genero>[0-9a-zA-Z){2,}/','principal.views.animes_generos'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

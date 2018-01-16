@@ -35,8 +35,18 @@ def animes_populares(request):
     return render_to_response('lista.html',{'animes':animes,'titulo':'Animes por popularidad'})
 
 
-def animes_generos(request):
-    animes = Anime.objects.all()
+def generos(request):
+#     animes = Anime.objects.all()
     generos = Genero.objects.all()
     
-    return render_to_response('listaG.html',{'animes':animes,'generos':generos,'titulo':'Animes por genero'})
+    return render_to_response('generos.html',{'generos':generos,'titulo':'Generos'})
+
+
+def animes_genero(request, genero):
+    animes = Anime.objects.all()
+    res = []
+    for a in animes:
+        if genero in a.generos:
+            res.append(a)
+    
+    return render_to_response('lista.html',{'animes':animes,'titulo':'Animes del genero '+genero})
