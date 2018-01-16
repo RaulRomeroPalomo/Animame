@@ -11,11 +11,17 @@
 			<h3>{{dato.titulo}}</h3>
 			<caption>Original: {{dato.original}}</caption>
 			<p>{{dato.sinopsis}}</p>
-			Lanzamiento: {{dato.lanzamiento}}
-			Tipo: {{dato.tipo}}
-			Estudio: {{dato.estudio}}
-			Popularidad: {{dato.popularidad}}
-			Generos: {{dato.generos}}
+			<p>Lanzamiento: {{dato.lanzamiento}}</p>
+			<p>Tipo: {{dato.tipo}}</p>
+			<p>Estudio: {{dato.estudio}}</p>
+			<p>Popularidad: {{dato.popularidad}}</p>
+			<p>Generos:
+				<ul>
+					{% for g in dato.generos.all %}
+						<li><a href="/lista/{{g}}">{{g}}</a></li>
+					{% endfor %}	
+				</ul>
+			</p>
 			<hr>
 		{% empty %}
 			<li>No hay Animes.</li>
