@@ -20,11 +20,9 @@
 			</p>
 			<p>Popularidad: {{dato.popularidad}}</p>
 			<p>Generos:
-				<ul>
-					{% for g in dato.generos.all %}
-						<li><a href="/listagenres/{{g}}">{{g}}</a></li>
-					{% endfor %}	
-				</ul>
+				{% for g in dato.generos.all %}
+					<a href="/listagenres/{{g}}">{{g}}</a> |
+				{% endfor %}	
 			</p>
 			<hr>
 		{% empty %}
