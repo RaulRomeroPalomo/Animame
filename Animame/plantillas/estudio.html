@@ -7,11 +7,11 @@
 
 {% block contenido %}
 	<hr>
-		{% for g in generos %}
-			<h4><a href="/listagenres/{{g}}">{{g}}</a></h4>
+		{% for e in estudios %}
+			<h4><a href="/listastudios/{{e}}">{{e}}</a></h4>
 			<hr>
 		{% empty %}
-			<li>No hay Generos.</li>
+			<li>No hay Estudios.</li>
 			<hr>
 		{% endfor %}
 {% endblock %}
