@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from django.core.management import call_command
 import requests
 
-from principal.models import Anime, Genero, Tipo, Estudio
+from principal.models import Anime, Genero, Tipo, Estudio, Usuario
 
 
 def principal():
@@ -99,17 +99,49 @@ def getUsuario(nombre):
     r=requests.get(url)
     data = r.text
     soup = BeautifulSoup(data, "lxml")
-    result = True
+    result = "Ok"
     if "404 Not Found" in soup:
-        result = False
+        result = "No existe el usuario"
     else:
+        allgenres = []
+        allstudios = []
         url = soup.find("div",{"class":"user-image mb8"}).img['src']
         favanime = soup.find("ul",{"class":"favorites-list anime"}).findAll("li",{"class":"list di-t mb8"})
-        for fav in favanime:
-            prefs = getDataAnime(fav.findAll("a")[1]['href'])          
-        
+        user = Usuario.objects.get_or_create(usuario=nombre,image=url)
+        user = user[0]
+        user.topestudios.clear()
+        user.topgeneros.clear()
+        if favanime:
+            for fav in favanime:
+                prefs = getDataAnime(fav.findAll("a")[1]['href'])
+                allstudios.append(prefs[0])
+                allgenres.append(prefs[1])
+            topstudios = getTop(allstudios)
+            for estudio in topstudios:
+                s = Estudio.objects.get_or_create(nombre=estudio) 
+                user.topestudios.add(s[0])            
+            topgenres = getTop(allgenres)
+            for genero in topgenres:
+                g = Genero.objects.get_or_create(nombre=genero)
+                user.topgeneros.add(g[0])
+
+        else:
+            result = "El usuario no tiene favoritos"
+
     return result
-       
+
+
+def getTop(lists):
+    flatten = sum(lists,[])
+    ranking = {}
+    for element in flatten:
+        if element not in ranking.keys():
+            ranking[element]=1
+        else:
+            ranking.update({element:ranking[element]+1})
+    
+    return sorted(ranking, key=ranking.get, reverse=True)[:3]
+
 
 def getDataAnime(url):
     prefs =[]
@@ -131,7 +163,6 @@ def getDataAnime(url):
     
     prefs.append(studies)
     prefs.append(generos)
-    print prefs
     return prefs
     
     

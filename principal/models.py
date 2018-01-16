@@ -12,12 +12,6 @@ class Genero(models.Model):
     def __unicode__(self):
         return self.nombre
     
-    
-class Tag(models.Model):
-    nombre = models.CharField(max_length=100, null=False, blank=False)
-    def __unicode__(self):
-        return self.nombre
-    
 class Estudio(models.Model):
     nombre = models.CharField(max_length=100, null=False, blank=False)
     def __unicode__(self):
@@ -39,8 +33,8 @@ class Anime(models.Model):
     
 class Usuario(models.Model):
     usuario = models.CharField(max_length=100, null=False, blank=False)
-    tags = models.ManyToManyField(Tag)
-    estudio = models.ForeignKey(Estudio)
+    topgeneros = models.ManyToManyField(Genero)
+    topestudios = models.ManyToManyField(Estudio)
     image = models.URLField()
     def __unicode__(self):
         return self.usuario
