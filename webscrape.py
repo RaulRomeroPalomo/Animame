@@ -58,7 +58,6 @@ def getAnime(url):
 
         print lanzamiento
         
-        
         side = soup.find("div",{"id":"content"}).find("div",{"class":"js-scrollfix-bottom"})
         typeStudio = side.findAll("a")
         tipo = "No type"
@@ -100,10 +99,43 @@ def getUsuario(nombre):
     r=requests.get(url)
     data = r.text
     soup = BeautifulSoup(data, "lxml")
+    result = True
+    if "404 Not Found" in soup:
+        result = False
+    else:
+        url = soup.find("div",{"class":"user-image mb8"}).img['src']
+        favanime = soup.find("ul",{"class":"favorites-list anime"}).findAll("li",{"class":"list di-t mb8"})
+        for fav in favanime:
+            prefs = getDataAnime(fav.findAll("a")[1]['href'])          
+        
+    return result
+       
+
+def getDataAnime(url):
+    prefs =[]
+    r = requests.get(url)
+    soup = BeautifulSoup(r.text,"lxml")      
+    side = soup.find("div",{"id":"content"}).find("div",{"class":"js-scrollfix-bottom"})
+    estudios = side.findAll("a")
+    studies = []
+    generos = []
+    for ts in estudios:
+        if "/producer" in ts["href"]:
+            studies.append(ts.get_text())        
+    genres=side.find("script",{"type":"text/javascript"})
+    if genres:
+        listgenres= str(genres).split("genres")[1].split("])")[0].replace('\"',"")[3:].strip().split(",")
+        for g in listgenres:
+            if g is not "":
+                generos.append(g)    
+    
+    prefs.append(studies)
+    prefs.append(generos)
+    print prefs
+    return prefs
+    
+    
     
        
-       
-       
-       
 if __name__=="__main__":
-    principal()
+    getUsuario("Yunekow")
