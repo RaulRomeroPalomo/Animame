@@ -30,7 +30,7 @@ def buscar_usuario(request):
 
 
 def animes_populares(request):
-    animes = Anime.objects.order_by('-popularidad')
+    animes = Anime.objects.order_by('popularidad')
     
     return render_to_response('lista.html',{'animes':animes,'titulo':'Animes por popularidad'})
 
@@ -49,4 +49,4 @@ def animes_genero(request, genero):
         if rg in a.generos.all():
             res.append(a)
     
-    return render_to_response('lista.html',{'animes':animes,'titulo':'Animes del genero '+genero})
+    return render_to_response('lista.html',{'animes':res,'titulo':'Animes del genero '+genero})
