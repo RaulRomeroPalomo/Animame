@@ -1,25 +1,30 @@
 #encoding: utf-8
-import sqlite3
-from types import NoneType
-
 from bs4 import BeautifulSoup
+from django.core.management import call_command
 import requests
 
 from principal.models import Anime, Genero, Tipo, Estudio
 
 
 def principal():
+    call_command('flush',interactive=False)
+    call_command('syncdb',interactive=False)
+
     url = "https://myanimelist.net/topanime.php?type=upcoming"
-    r=requests.get(url)
-    data = r.text
-        
-    soup = BeautifulSoup(data, "lxml")
-    body = soup.find("table",{"class":"top-ranking-table"})
-    ranking = body.findAll("tr",{"class":"ranking-list"})
-    for r in ranking:
-        titulo = r.find("a",{"class":"hoverinfo_trigger fl-l fs14 fw-b"})
-        url = titulo["href"]
-        getAnime(url)
+
+    i=0
+    while i <= 250:    
+        r=requests.get(url)
+        data = r.text
+        soup = BeautifulSoup(data, "lxml")
+        body = soup.find("table",{"class":"top-ranking-table"})
+        ranking = body.findAll("tr",{"class":"ranking-list"})
+        for r in ranking:
+            titulo = r.find("a",{"class":"hoverinfo_trigger fl-l fs14 fw-b"})
+            url = titulo["href"]
+            getAnime(url)
+        i+=50
+        url = "https://myanimelist.net/topanime.php?type=upcoming&limit="+str(i)
 
 
 def getAnime(url):
@@ -86,7 +91,9 @@ def getAnime(url):
         print e
         
          
-    
+
+def getUsuario():
+    print "empty"
        
 if __name__=="__main__":
     principal()
