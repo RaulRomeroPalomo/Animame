@@ -62,38 +62,48 @@ def getAnime(url):
         side = soup.find("div",{"id":"content"}).find("div",{"class":"js-scrollfix-bottom"})
         typeStudio = side.findAll("a")
         tipo = "No type"
-        studio = "No studio"
+        studio = []
         for ts in typeStudio:
             if "?type" in ts["href"]:
                 tipo = ts.get_text()
             otipo =Tipo.objects.get_or_create(nombre=tipo)
             if "/producer" in ts["href"]:
-                studio = ts.get_text()
-            ostudio = Estudio.objects.get_or_create(nombre=studio)
+                studio.append(ts.get_text())
+        if not studio:
+            studio=["Unknown"]
                 
         anime = Anime.objects.create(titulo=name,original=original,sinopsis=sinopsis,lanzamiento=lanzamiento,
-                             popularidad=int(popularity),tipo=otipo[0],estudio=ostudio[0])
+                             popularidad=int(popularity),tipo=otipo[0])
         
+        for s in studio:
+            print s
+            os = Estudio.objects.get_or_create(nombre=s)
+            anime.estudios.add(os[0])
+            
         genres=side.find("script",{"type":"text/javascript"})
         if genres:
             listgenres= str(genres).split("genres")[1].split("])")[0].replace('\"',"")[3:].strip().split(",")
             for g in listgenres:
-                print g
-                genero=Genero.objects.get_or_create(nombre=g)
-                anime.generos.add(genero[0])
+                if g is not "":
+                    genero=Genero.objects.get_or_create(nombre=g)
+                    anime.generos.add(genero[0])
         
         print tipo
-        print studio
-
-        
         
     except AttributeError as e:
         print e
         
          
 
-def getUsuario():
-    print "empty"
+def getUsuario(nombre):
+    url="https://myanimelist.net/profile/"+nombre
+    r=requests.get(url)
+    data = r.text
+    soup = BeautifulSoup(data, "lxml")
+    
+       
+       
+       
        
 if __name__=="__main__":
     principal()

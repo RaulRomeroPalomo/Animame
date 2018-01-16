@@ -29,7 +29,7 @@ class Anime(models.Model):
     sinopsis = models.CharField(max_length=500, null=False, blank=True)
     lanzamiento = models.CharField(max_length=500, null=False, blank=True)
     tipo = models.ForeignKey(Tipo)
-    estudio = models.ForeignKey(Estudio)
+    estudios = models.ManyToManyField(Estudio)
     generos = models.ManyToManyField(Genero)
     popularidad = models.IntegerField(null=False)
 #     clasificacionedad = models.IntegerField()
