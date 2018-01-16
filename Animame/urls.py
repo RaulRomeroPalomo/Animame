@@ -11,6 +11,8 @@ urlpatterns = patterns('',
     # url(r'^Animame/', include('Animame.foo.urls')),
     
     url(r'^searchusuario/', 'principal.views.buscar_usuario'),
+    url(r'^popularity/', 'principal.views.animes_populares'),
+    url(r'^genres/', 'principal.views.animes_generos'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

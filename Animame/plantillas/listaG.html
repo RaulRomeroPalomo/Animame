@@ -1,0 +1,42 @@
+{% extends 'inicio.html' %}
+
+
+{% block encabezado %}
+	<h2>{{titulo}}</h2>
+{% endblock %}
+
+{% block contenido %}
+	<hr>
+		{% for g in generos %}
+			<h2>{{g}}</h2>
+			{% for dato in anime %}
+				{% if g in dato.generos %}
+					<h3>{{dato.titulo}}</h3>
+					<caption>Original: {{dato.original}}</caption>
+					<p>{{dato.sinopsis}}</p>
+					Lanzamiento: {{dato.lanzamiento}}
+					Tipo: {{dato.tipo}}
+					Estudio: {{dato.estudio}}
+					<hr>
+				{% endif %}
+			{% empty %}
+				<li>No hay Generos.</li>
+				<hr>
+			{% endfor %}
+		{% empty %}
+			<li>No hay Generos.</li>
+			<hr>
+		{% endfor %}
+{% endblock %}
+
+
+<!--titulo = models.CharF ield(max_length=100, null=False, blank=False)
+    original = models.CharField(max_length=100, null=True, blank=True)
+    sinopsis = models.CharField(max_length=500, null=False, blank=True)
+    lanzamiento = models.CharField(max_length=500, null=False, blank=True)
+    tipo = models.ManyToManyField(Tipo)
+    estudio = models.CharField(max_length=100, null=False, blank=False)
+    generos = models.ManyToManyField(Genero)
+    popularidad = models.IntegerField(null=False)
+    clasificacionedad -->
+	

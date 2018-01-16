@@ -20,3 +20,15 @@ def buscar_usuario(request):
     else:
         formulario = SearchForm()
     return render_to_response('search.html',{'formulario':formulario}, context_instance=RequestContext(request))
+
+
+def animes_populares(request):
+    animes = Anime.objects.order_by('popularidad')
+    
+    return render_to_response('lista.html',{'animes':animes,'titulo':'Animes por popularidad'})
+
+def animes_generos(request):
+    animes = Anime.objects.all()
+    generos = Genero.objects.all()
+    
+    return render_to_response('listaG.html',{'animes':animes,'generos':generos,'titulo':'Animes por genero'})
