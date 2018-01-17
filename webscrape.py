@@ -100,7 +100,8 @@ def getUsuario(nombre):
     data = r.text
     soup = BeautifulSoup(data, "lxml")
     result = "?"
-    if "404" in soup.find("h1",{"class","h1"}).get_text():
+    message = soup.find("h1",{"class","h1"})
+    if message and "404" in message.get_text():
         result = "No existe el usuario"
     else:
         allgenres = []
@@ -179,4 +180,6 @@ def getDataAnime(url):
     
        
 if __name__=="__main__":
-    getUsuario("Cerilla")
+    getUsuario("Yunekow")
+    
+    
