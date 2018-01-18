@@ -24,11 +24,13 @@
 		</div>
 		
 		<a href="/cargarNuevo/{{usuario.usuario}}">Recargar informacion</a>
-		(Esta acción llevara un timpo)
+		(Esta accion llevara un timpo)
 	{% endif %}
 	
 		{% for dato in animes %}
-		<div id="fondo">
+		<div id="fondo" style="margin-bottom: 30px; padding-bottom: 25px;">
+			<img src="{{dato.imagen}}" style=" margin-right: 20px;     vertical-align:top; display:inline-block; border-radius: 4px;"/>
+			<div style="width:70%; display:inline-block;">
 			<h3>{{dato.titulo}}</h3>
 			<caption>Original: <span id="cosas">{{dato.original}}</span></caption>
 			<p>{{dato.sinopsis}}</p>
@@ -45,7 +47,7 @@
 				{% endfor %}</span>
 			</p>
 			<p>Ranking: <span id="cosas">{{dato.popularidad}}</span></p>
-			<hr>
+			</div>
 		</div>
 		{% empty %}
 			<li>No hay Animes.</li>

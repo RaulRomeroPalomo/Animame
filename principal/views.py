@@ -75,6 +75,17 @@ def buscar_usuario(request):
     return render_to_response('search.html',{'formulario':formulario,'titulo':'Busca tu usuario'}, context_instance=RequestContext(request))
 
 
+def recargar_usuario(request,usuario):
+    user, estado = webscrape.getUsuario(usuario)
+    if estado == 0: #Todo bien
+        animes = loadDict(user)
+        return render_to_response('lista.html',{'animes':animes,'usuario':user,'rs':True,'titulo':"Recomendados para '"+usuario+"'"})
+    if estado == 1: #No existe usuario
+        return render_to_response('inicio.html',{'usuario':'No existe usuario'})
+    if estado == 2: #No tiene favoritos
+        return render_to_response('inicio.html',{'usuario':'Debes tener favoritos para usar el sistema de recomendación'})
+
+
 def buscar_palabra(request):
     if request.method == 'POST':
         formulario = WordForm(request.POST)

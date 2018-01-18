@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     
     url(r'^populate/', 'principal.views.populate'),
     url(r'^searchusuario/', 'principal.views.buscar_usuario'),
+    url(r'^cargarNuevo/(?P<usuario>([0-9a-zA-Z]{1,}[-_]{0,})*)', 'principal.views.recargar_usuario'),
     url(r'^searchword/', 'principal.views.buscar_palabra'),
     url(r'^searchsynopsis/', 'principal.views.buscar_sinopsis'),
     url(r'^genres/', 'principal.views.generos'),
