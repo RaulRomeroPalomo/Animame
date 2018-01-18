@@ -6,6 +6,19 @@
 {% endblock %}
 
 {% block contenido %}
+	{% if rs %}
+		<p>Generos favoritos: |
+			{% for g in usuario.topgeneros.all %}
+				<a href="/listagenres/{{g}}">{{g}}</a> |
+			{% endfor %}
+		</p>
+		<p>Estudios favoritos: |
+			{% for e in usuario.topestudios.all %}
+				<a href="/listastudios/{{e}}">{{e}}</a> |
+			{% endfor %}
+		</p>
+	{% endif %}
+	
 		{% for dato in animes %}
 		<div id="fondo">
 			<h3>{{dato.titulo}}</h3>
