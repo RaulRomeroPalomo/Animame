@@ -56,7 +56,12 @@ def buscar_usuario(request):
         formulario = SearchForm(request.POST)
         if formulario.is_valid():
             usuario = formulario.cleaned_data['usuario']
-            user, estado = webscrape.getUsuario(usuario)
+            try:
+                user = Usuario.objects.get(usuario=usuario)
+                estado = 0
+            except:
+                user, estado = webscrape.getUsuario(usuario)
+                
             print estado
             if estado == 0: #Todo bien
                 animes = loadDict(user)

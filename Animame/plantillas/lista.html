@@ -7,6 +7,8 @@
 
 {% block contenido %}
 	{% if rs %}
+		<div style="width:100%; display:inline-block" >
+		<div style="display:inline-block ">
 		<p>Generos favoritos: |
 			{% for g in usuario.topgeneros.all %}
 				<a href="/listagenres/{{g}}">{{g}}</a> |
@@ -17,6 +19,9 @@
 				<a href="/listastudios/{{e}}">{{e}}</a> |
 			{% endfor %}
 		</p>
+		</div>
+		<img src="{{usuario.image}}" style=" margin: 0 15% 2% 15% ; display:inline-block; border-radius: 4px"/>
+		</div>
 	{% endif %}
 	
 		{% for dato in animes %}

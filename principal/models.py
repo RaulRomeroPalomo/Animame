@@ -26,6 +26,7 @@ class Anime(models.Model):
     estudios = models.ManyToManyField(Estudio)
     generos = models.ManyToManyField(Genero)
     popularidad = models.IntegerField(null=False)
+    imagen = models.CharField(max_length=500, null=False, blank=True)
 #     clasificacionedad = models.IntegerField()
     def __unicode__(self):
         return self.titulo
