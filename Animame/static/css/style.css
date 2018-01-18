@@ -85,12 +85,9 @@ h3{
 
 #titulo {
 	background-color: #ffca4d;
-	margin-right: 50px;
-	margin-left: 50px;
+	margin-top: 0px;
 	padding-top: 7px;
-	width: 250px;
 	height: 60px;
-	border-radius: 5px;
 }
 
 #tituloAnimes {
