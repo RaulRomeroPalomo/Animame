@@ -31,12 +31,12 @@
 					<a href="/listastudios/{{e}}">{{e}}</a> |
 				{% endfor %}</span>
 			</p>
-			<p>Popularidad: <span id="cosas">{{dato.popularidad}}</span></p>
 			<p>Generos: <span id="cosas"> |
 				{% for g in dato.generos.all %}
 					<a href="/listagenres/{{g}}">{{g}}</a> |
 				{% endfor %}</span>
 			</p>
+			<p>Popularidad: <span id="cosas">{{dato.popularidad}}</span></p>
 			<hr>
 		</div>
 		{% empty %}
