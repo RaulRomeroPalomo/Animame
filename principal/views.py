@@ -40,7 +40,7 @@ def buscar_palabra(request):
             return render_to_response('lista.html',{'animes':animes,'titulo':"Animes con '"+word+"' en el Titulo"})
     else:
         formulario = WordForm()
-    return render_to_response('search.html',{'formulario':formulario,'titulo':'Busqueda por palabras'}, context_instance=RequestContext(request))
+    return render_to_response('search.html',{'formulario':formulario,'titulo':'Busqueda por palabras en el titulo'}, context_instance=RequestContext(request))
 
 
 def buscar_sinopsis(request):
@@ -53,7 +53,7 @@ def buscar_sinopsis(request):
             return render_to_response('lista.html',{'animes':animes,'titulo':"La sinospsis contiene '"+word+"'"})
     else:
         formulario = WordForm()
-    return render_to_response('search.html',{'formulario':formulario,'titulo':'Busqueda por palabras'}, context_instance=RequestContext(request))
+    return render_to_response('search.html',{'formulario':formulario,'titulo':'Busqueda por palabras en la sinopsis'}, context_instance=RequestContext(request))
 
 
 def animes_populares(request):
