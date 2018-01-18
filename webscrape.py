@@ -5,10 +5,13 @@ import requests
 
 from principal.models import Anime, Genero, Tipo, Estudio, Usuario
 
+from index import *
+
 
 def principal():
     call_command('flush',interactive=False)
     call_command('syncdb',interactive=False)
+    ix=inicia_indice()
 
     url = "https://myanimelist.net/topanime.php?type=upcoming"
 
@@ -22,32 +25,32 @@ def principal():
         for r in ranking:
             titulo = r.find("a",{"class":"hoverinfo_trigger fl-l fs14 fw-b"})
             url = titulo["href"]
-            getAnime(url)
+            getAnime(url, ix)
         i+=50
         url = "https://myanimelist.net/topanime.php?type=upcoming&limit="+str(i)
 
 
-def getAnime(url):
+def getAnime(url, ix):
     r = requests.get(url)
     try:
         soup = BeautifulSoup(r.text,"lxml")
         name = soup.find("span",{"itemprop":"name"}).get_text()
-        print name
+#         print name
         sinopsis = soup.find("span",{"itemprop":"description"})
         if sinopsis:
             sinopsis=sinopsis.get_text()
         else:
             sinopsis="No existe sinopsis"
-        print sinopsis
+#         print sinopsis
         popularity = soup.find("span",{"class":"numbers popularity"}).strong.get_text().replace("#","")
-        print popularity
+#         print popularity
         lateral = soup.find("td",{"class":"borderClass"})
         nombrejapo = lateral.findAll("div",{"class":"spaceit_pad"})
         original = "No disponible"
         if len(nombrejapo) > 1:
             original = nombrejapo[1].get_text().split(":")[1].strip()
             
-        print original
+#         print original
         otherInfo=soup.findAll("div",{"class":"spaceit"})
         lanzamiento = "No hay fecha"
         for info in otherInfo:
@@ -56,7 +59,7 @@ def getAnime(url):
                 info.span.clear()
                 lanzamiento = info.get_text().strip() 
 
-        print lanzamiento
+#         print lanzamiento
         
         side = soup.find("div",{"id":"content"}).find("div",{"class":"js-scrollfix-bottom"})
         typeStudio = side.findAll("a")
@@ -71,11 +74,12 @@ def getAnime(url):
         if not studio:
             studio=["Unknown"]
                 
-        anime = Anime.objects.create(titulo=name,original=original,sinopsis=sinopsis,lanzamiento=lanzamiento,
-                             popularidad=int(popularity),tipo=otipo[0])
+        anime = Anime.objects.create(titulo=name,original=original,sinopsis=sinopsis,lanzamiento=lanzamiento,popularidad=int(popularity),tipo=otipo[0])
+        
+        setIndice(anime,ix)
         
         for s in studio:
-            print s
+#             print s
             os = Estudio.objects.get_or_create(nombre=s)
             anime.estudios.add(os[0])
             
@@ -87,7 +91,7 @@ def getAnime(url):
                     genero=Genero.objects.get_or_create(nombre=g)
                     anime.generos.add(genero[0])
         
-        print tipo
+#         print tipo
         
     except AttributeError as e:
         print e
@@ -180,6 +184,5 @@ def getDataAnime(url):
     
        
 if __name__=="__main__":
-    getUsuario("Yunekow")
-    
+    principal()
     
