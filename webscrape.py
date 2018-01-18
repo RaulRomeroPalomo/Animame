@@ -21,14 +21,17 @@ def principal():
         data = r.text
         soup = BeautifulSoup(data, "lxml")
         body = soup.find("table",{"class":"top-ranking-table"})
-        ranking = body.findAll("tr",{"class":"ranking-list"})
-        for r in ranking:
-            titulo = r.find("a",{"class":"hoverinfo_trigger fl-l fs14 fw-b"})
-            url = titulo["href"]
-            getAnime(url, ix)
+        try:
+            ranking = body.findAll("tr",{"class":"ranking-list"})
+            for r in ranking:
+                titulo = r.find("a",{"class":"hoverinfo_trigger fl-l fs14 fw-b"})
+                url = titulo["href"]
+                getAnime(url, ix)
+        except AttributeError as e:
+            print e
         i+=50
         url = "https://myanimelist.net/topanime.php?type=upcoming&limit="+str(i)
-
+        
 
 
 
