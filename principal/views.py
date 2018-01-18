@@ -106,7 +106,7 @@ def buscar_sinopsis(request):
             word = formulario.cleaned_data['word']
             animes = buscar('sinopsis', word)
             
-            return render_to_response('lista.html',{'animes':animes,'titulo':"La sinospsis contiene '"+word+"'"})
+            return render_to_response('lista.html',{'animes':animes,'titulo':"La sinopsis contiene '"+word+"'"})
     else:
         formulario = WordForm()
     return render_to_response('search.html',{'formulario':formulario,'titulo':'Busqueda por palabras en la sinopsis'}, context_instance=RequestContext(request))
