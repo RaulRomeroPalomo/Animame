@@ -1,12 +1,22 @@
 <html>
-<head>
-<title>Animame</title>
-</head>
-<body>
-<h1>Animame ;)</h1>
-{% include 'header.html' %}
-{% block encabezado %}{% endblock %}
-{% block contenido %}{% endblock %}
-<p>{{mensaje}}</p>
-</body>
+	<head>
+	<title>Animame</title>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Fredoka+One|Lato|Finger+Paint" rel="stylesheet">
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	
+	</head>
+	<body>
+		<div class="row">
+		
+		{% include 'header.html' %}
+		<div class="col-sm-10 content">
+		{% block encabezado %}{% endblock %}
+		
+		<p>{{mensaje}}</p>
+		{% block contenido %}{% endblock %}
+		</div>
+	</body>
 </html>

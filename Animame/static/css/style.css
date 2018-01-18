@@ -1,0 +1,73 @@
+.page-header h1 {
+	color:#FFFFFF ;
+	font-family: 'Fredoka One';
+	text-align: center;
+	padding: 0px 10px;
+}
+
+
+
+.page-header {
+    background-color: #FCA205;
+    margin-top: 0;
+    padding: 0px 0px 0px 0px;
+   	height: 100%;
+	position: fixed;
+	float:left;
+    
+}
+
+.page-header ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+   	text-align: center;
+    
+}
+
+.page-header a {
+    color: #FFFFFF;
+    width: 100%;
+    
+}
+
+.page-header a:hover {
+    color: #FFFFFF;
+    text-decoration:  none;
+    
+    
+}
+
+
+.page-header li {
+    padding: 20px 20px 20px 20px;
+	
+	display: block;
+    text-align: center;
+    border-radius: 5px;
+    font-color: #FFFFFF ;
+    font-family: 'Lato' ;
+    font-size: 1.25em; 
+}
+.page-header li:hover {
+	background: #ffca4d;
+}
+html, body{
+	width:100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+
+}
+
+
+
+h2 {
+	margin: 10px 0px;
+}
+.content{
+	marging : 0px;
+	height: 100%;
+	float: right;
+	
+}
