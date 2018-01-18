@@ -12,6 +12,8 @@ urlpatterns = patterns('',
     
     url(r'^populate/', 'principal.views.populate'),
     url(r'^searchusuario/', 'principal.views.buscar_usuario'),
+    url(r'^searchword/', 'principal.views.buscar_palabra'),
+    url(r'^searchsynopsis/', 'principal.views.buscar_sinopsis'),
     url(r'^popularity/', 'principal.views.animes_populares'),
     url(r'^genres/', 'principal.views.generos'),
     url(r'^listagenres/(?P<genero>([0-9a-zA-Z]{1,}[- ]{0,})*)/','principal.views.animes_genero'),

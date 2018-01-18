@@ -6,6 +6,7 @@ from django.template import RequestContext
 
 from principal.models import *
 from principal.forms import *
+from index import *
 
 import webscrape
 
@@ -26,7 +27,33 @@ def buscar_usuario(request):
             return render_to_response('inicio.html')
     else:
         formulario = SearchForm()
-    return render_to_response('search.html',{'formulario':formulario}, context_instance=RequestContext(request))
+    return render_to_response('search.html',{'formulario':formulario,'titulo':'Busca tu usuario'}, context_instance=RequestContext(request))
+
+
+def buscar_palabra(request):
+    if request.method == 'POST':
+        formulario = WordForm(request.POST)
+        if formulario.is_valid():
+            word = formulario.cleaned_data['word']
+            animes = buscar('titulo', word)
+            
+            return render_to_response('lista.html',{'animes':animes,'titulo':"Animes con '"+word+"' en el Titulo"})
+    else:
+        formulario = WordForm()
+    return render_to_response('search.html',{'formulario':formulario,'titulo':'Busqueda por palabras'}, context_instance=RequestContext(request))
+
+
+def buscar_sinopsis(request):
+    if request.method == 'POST':
+        formulario = WordForm(request.POST)
+        if formulario.is_valid():
+            word = formulario.cleaned_data['word']
+            animes = buscar('sinopsis', word)
+            
+            return render_to_response('lista.html',{'animes':animes,'titulo':"La sinospsis contiene '"+word+"'"})
+    else:
+        formulario = WordForm()
+    return render_to_response('search.html',{'formulario':formulario,'titulo':'Busqueda por palabras'}, context_instance=RequestContext(request))
 
 
 def animes_populares(request):

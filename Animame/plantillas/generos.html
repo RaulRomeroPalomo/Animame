@@ -6,13 +6,10 @@
 {% endblock %}
 
 {% block contenido %}
-	
-	
-	
+	<hr>
 		{% for g in generos %}
 			<h4><a href="/listagenres/{{g}}">{{g}}</a></h4>
 			<hr>
-			
 		{% empty %}
 			<li>No hay Generos.</li>
 			<hr>
