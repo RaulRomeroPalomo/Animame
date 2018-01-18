@@ -1,0 +1,17 @@
+{% extends 'inicio.html' %}
+
+
+{% block encabezado %}
+	<h2>{{titulo}}</h2>
+{% endblock %}
+
+{% block contenido %}
+	<hr>
+		{% for t in tipos %}
+			<h4><a href="/listatypes/{{t}}">{{t}}</a></h4>
+			<hr>
+		{% empty %}
+			<li>No hay Tipos.</li>
+			<hr>
+		{% endfor %}
+{% endblock %}
