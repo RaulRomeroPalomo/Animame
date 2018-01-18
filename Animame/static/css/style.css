@@ -76,7 +76,13 @@ h3{
 }
 
 #titulo {
-	background-image: url(https://myanimelist.cdn-dena.com/images/characters/14/310613.jpg);
+	background-color: #e5e5e5;
+	margin-right: 50px;
+	margin-left: 50px;
+	padding-top: 7px;
+	width: 250px;
+	height: 60px;
+	border-radius: 5px;
 }
 
 #tituloAnimesPopulares {
