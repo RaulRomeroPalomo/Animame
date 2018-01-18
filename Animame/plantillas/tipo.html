@@ -2,14 +2,12 @@
 
 
 {% block encabezado %}
-	<h2>{{titulo}}</h2>
+	<h2 id="tituloAnimes">{{titulo}}</h2>
 {% endblock %}
 
 {% block contenido %}
-	<hr>
 		{% for t in tipos %}
-			<h4><a href="/listatypes/{{t}}">{{t}}</a></h4>
-			<hr>
+			<a id="boton" href="/listatypes/{{t}}"><h4>{{t}}</h4></a>
 		{% empty %}
 			<li>No hay Tipos.</li>
 			<hr>

@@ -2,14 +2,12 @@
 
 
 {% block encabezado %}
-	<h2>{{titulo}}</h2>
+	<h2 id="tituloAnimes">{{titulo}}</h2>
 {% endblock %}
 
 {% block contenido %}
-	<hr>
 		{% for e in estudios %}
-			<h4><a href="/listastudios/{{e}}">{{e}}</a></h4>
-			<hr>
+			<a id="boton" href="/listastudios/{{e}}"><h4>{{e}}</h4></a>
 		{% empty %}
 			<li>No hay Estudios.</li>
 			<hr>

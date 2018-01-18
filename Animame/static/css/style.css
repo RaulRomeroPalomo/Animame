@@ -2,7 +2,7 @@
 	color:#000000;
 	font-family: 'Fredoka One';
 	text-align: center;
-	padding: 0px 10px;
+	padding: 0px 0px;
 }
 
 
@@ -57,11 +57,10 @@ html, body{
 	height: 100%;
 	margin: 0px;
 	padding: 0px;
-
+	background-color: #e5e5e5;
 }
 
 div {
-	background-color: #e5e5e5;
 	height: auto !important;
 }
 
@@ -75,8 +74,17 @@ h3{
 	
 }
 
+#formulario {
+	font-weight: bold;
+    font-style: italic;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 20px;
+    font-size: 15px;
+    padding-bottom: 3px;
+}
+
 #titulo {
-	background-color: #e5e5e5;
+	background-color: #ffca4d;
 	margin-right: 50px;
 	margin-left: 50px;
 	padding-top: 7px;
@@ -85,17 +93,37 @@ h3{
 	border-radius: 5px;
 }
 
-#tituloAnimesPopulares {
+#tituloAnimes {
 	color: #000000 ;
 	margin: 10px 0px;
 }
 
-#fondo{
+#fondo {
 	background: #FFFFFF;
 	border-radius: 5px ;
 	padding-top: 25px ;
 	padding-left: 25px;
 
+}
+
+#boton {
+    background-color: #e5e5e5;
+    border-radius: 8px;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #FFFFFF;
+	padding: 20px;
+	margin: 5px;
+}
+
+h4{
+
+	margin: 10px 50px;
+	display: inline-block;
 }
 
 #cosas{
