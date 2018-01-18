@@ -2,7 +2,7 @@
 
 
 {% block encabezado %}
-	<h2 id="tituloAnimesPopulares">{{titulo}}</h2>
+	<h2 id="tituloAnimes">{{titulo}}</h2>
 {% endblock %}
 
 {% block contenido %}
@@ -22,6 +22,9 @@
 		</div>
 		<img src="{{usuario.image}}" style=" margin: 0 15% 2% 15% ; display:inline-block; border-radius: 4px"/>
 		</div>
+		
+		<a href="/cargarNuevo/{{usuario.usuario}}">Recargar informacion</a>
+		(Esta acción llevara un timpo)
 	{% endif %}
 	
 		{% for dato in animes %}

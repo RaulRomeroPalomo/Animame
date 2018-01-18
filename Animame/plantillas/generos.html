@@ -2,16 +2,15 @@
 
 
 {% block encabezado %}
-	<h2>{{titulo}}</h2>
+	<h2 id="tituloAnimes">{{titulo}}</h2>
 {% endblock %}
 
 {% block contenido %}
-	<hr>
 		{% for g in generos %}
-			<h4><a href="/listagenres/{{g}}">{{g}}</a></h4>
-			<hr>
+			<a id="boton" href="/listagenres/{{g}}"><h4>{{g}}</h4></a>
 		{% empty %}
 			<li>No hay Generos.</li>
 			<hr>
+	</div>
 		{% endfor %}
 {% endblock %}
