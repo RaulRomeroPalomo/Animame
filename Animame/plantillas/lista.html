@@ -2,29 +2,30 @@
 
 
 {% block encabezado %}
-	<h2>{{titulo}}</h2>
+	<h2 id="tituloAnimesPopulares">{{titulo}}</h2>
 {% endblock %}
 
 {% block contenido %}
-	<hr>
 		{% for dato in animes %}
+		<div id="fondo">
 			<h3>{{dato.titulo}}</h3>
-			<caption>Original: {{dato.original}}</caption>
+			<caption>Original: <span id="cosas">{{dato.original}}</span></caption>
 			<p>{{dato.sinopsis}}</p>
-			<p>Lanzamiento: {{dato.lanzamiento}}</p>
-			<p>Tipo: {{dato.tipo}}</p>
-			<p>Estudios: |
+			<p>Lanzamiento: <span id="cosas">{{dato.lanzamiento}}</span></p>
+			<p>Tipo: <span id="cosas">{{dato.tipo}}</span></p>
+			<p>Estudios: <span id="cosas"> |
 				{% for e in dato.estudios.all %}
 					<a href="/listastudios/{{e}}">{{e}}</a> |
-				{% endfor %}
+				{% endfor %}</span>
 			</p>
-			<p>Popularidad: {{dato.popularidad}}</p>
-			<p>Generos: |
+			<p>Popularidad: <span id="cosas">{{dato.popularidad}}</span></p>
+			<p>Generos: <span id="cosas"> |
 				{% for g in dato.generos.all %}
 					<a href="/listagenres/{{g}}">{{g}}</a> |
-				{% endfor %}	
+				{% endfor %}</span>
 			</p>
 			<hr>
+		</div>
 		{% empty %}
 			<li>No hay Animes.</li>
 		{% endfor %}
