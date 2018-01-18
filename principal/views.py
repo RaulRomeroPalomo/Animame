@@ -129,3 +129,18 @@ def animes_estudio(request, estudio):
         if re in a.estudios.all():
             res.append(a)
     return render_to_response('lista.html',{'animes':res,'titulo':'Animes del estudio '+estudio})
+
+
+def tipos(request):
+    tipos = Tipo.objects.all().order_by('nombre')
+    return render_to_response('tipo.html',{'tipos':tipos,'titulo':'Tipo'})
+
+
+def animes_tipo(request, tipo):
+    animes = Anime.objects.all()
+    re = Tipo.objects.get(nombre=tipo)
+    res = []
+    for a in animes:
+        if re == a.tipo:
+            res.append(a)
+    return render_to_response('lista.html',{'animes':res,'titulo':'Animes '+tipo})

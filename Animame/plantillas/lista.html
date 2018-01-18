@@ -25,7 +25,7 @@
 			<caption>Original: <span id="cosas">{{dato.original}}</span></caption>
 			<p>{{dato.sinopsis}}</p>
 			<p>Lanzamiento: <span id="cosas">{{dato.lanzamiento}}</span></p>
-			<p>Tipo: <span id="cosas">{{dato.tipo}}</span></p>
+			<p>Tipo: <span id="cosas"><a href="/listatypes/{{dato.tipo}}">{{dato.tipo}}</a></span></p>
 			<p>Estudios: <span id="cosas"> |
 				{% for e in dato.estudios.all %}
 					<a href="/listastudios/{{e}}">{{e}}</a> |
