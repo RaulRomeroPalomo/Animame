@@ -103,10 +103,11 @@ def getUsuario(nombre):
     r=requests.get(url)
     data = r.text
     soup = BeautifulSoup(data, "lxml")
-    result = "?"
+    estado = 0
+    result=""
     message = soup.find("h1",{"class","h1"})
     if message and "404" in message.get_text():
-        result = "No existe el usuario"
+        estado = 1
     else:
         allgenres = []
         allstudios = []
@@ -140,10 +141,10 @@ def getUsuario(nombre):
             
             result = user
         else:
-            result = nombre+" no tiene animes favoritos, por lo que no podemos hacer ninguna recomendación."
+            estado = 2
     
-    print result
-    return result
+#    print result,estado
+    return result,estado
 
 
 def getTop(lists):
@@ -184,5 +185,5 @@ def getDataAnime(url):
     
        
 if __name__=="__main__":
-    principal()
+    getUsuario("Yunekow")
     

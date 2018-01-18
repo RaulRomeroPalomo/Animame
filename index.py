@@ -17,7 +17,7 @@ def inicia_indice():
 
 def setIndice(anime, ix):
     writer = ix.writer()
-    print anime.titulo
+#    print anime.titulo
     writer.add_document(titulo=unicode(anime.titulo).strip(), sinopsis=unicode(anime.sinopsis).strip())
     writer.commit()  
     
