@@ -30,27 +30,34 @@ def principal():
         url = "https://myanimelist.net/topanime.php?type=upcoming&limit="+str(i)
 
 
+
+
 def getAnime(url, ix):
     r = requests.get(url)
     try:
         soup = BeautifulSoup(r.text,"lxml")
+        #GetNombre
         name = soup.find("span",{"itemprop":"name"}).get_text()
 #         print name
+        #GetSinopsis
         sinopsis = soup.find("span",{"itemprop":"description"})
         if sinopsis:
             sinopsis=sinopsis.get_text()
         else:
             sinopsis="No existe sinopsis"
 #         print sinopsis
+        #GetPopularidad
         popularity = soup.find("span",{"class":"numbers popularity"}).strong.get_text().replace("#","")
 #         print popularity
         lateral = soup.find("td",{"class":"borderClass"})
         nombrejapo = lateral.findAll("div",{"class":"spaceit_pad"})
+        #GetOriginal
         original = "No disponible"
         if len(nombrejapo) > 1:
             original = nombrejapo[1].get_text().split(":")[1].strip()
             
 #         print original
+        #GetLanzamiento
         otherInfo=soup.findAll("div",{"class":"spaceit"})
         lanzamiento = "No hay fecha"
         for info in otherInfo:
@@ -60,10 +67,11 @@ def getAnime(url, ix):
                 lanzamiento = info.get_text().strip() 
 
 #         print lanzamiento
-        
+        #GetTipo
         side = soup.find("div",{"id":"content"}).find("div",{"class":"js-scrollfix-bottom"})
         typeStudio = side.findAll("a")
         tipo = "No type"
+        #GetEstudio
         studio = []
         for ts in typeStudio:
             if "?type" in ts["href"]:
@@ -73,8 +81,14 @@ def getAnime(url, ix):
                 studio.append(ts.get_text())
         if not studio:
             studio=["Unknown"]
-                
-        anime = Anime.objects.create(titulo=name,original=original,sinopsis=sinopsis,lanzamiento=lanzamiento,popularidad=int(popularity),tipo=otipo[0])
+        #GetImagen
+        url = soup.find("img",{"itemprop":"image"})
+        if url:
+            url=url['src']
+        else:
+            url = ""
+        
+        anime = Anime.objects.create(titulo=name,original=original,imagen=url,sinopsis=sinopsis,lanzamiento=lanzamiento,popularidad=int(popularity),tipo=otipo[0])
         
         setIndice(anime,ix)
         
@@ -185,5 +199,5 @@ def getDataAnime(url):
     
        
 if __name__=="__main__":
-    getUsuario("Yunekow")
+    principal()
     
